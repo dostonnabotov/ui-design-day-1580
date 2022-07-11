@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+/* ==========
+  Root
+========== */
+:root {
+  --clr-accent-400: #F17A37;
+  --clr-accent-200: #FFFAF2;
+
+  --neutral-100: #FFFFFF;
+  --neutral-200: #CFCFCF;
+  --neutral-250: #E5E5E5;
+  --neutral-300: #DFDFDF;
+  --neutral-800: #13143C;
+
+  --ff-body: 'Poppins', sans-serif;
+
+  --fs-300: .9rem;
+  --fs-400: 1rem;
+  --fs-700: 1.2rem;
+
+  --fw-400: 400;
+  --fw-500: 500;
+  --fw-700: 700;
+}
+
+@media (min-width: 50em) {
+  :root {
+    --fs-300: 1rem;
+    --fs-400: 1.125rem;
+    --fs-700: 1.5rem;
+  }
+}
+
+/* ==========
+  Reset
+========== */
+*, 
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  font: inherit;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  text-rendering: optimizeSpeed;
+  line-height: 1.5;
+}
+
+ul[role="list"],
+ol[role="list"] {
+  list-style: none;
+}
+
+main {
+  display: grid;
+  place-items: center;
+  min-height: 100%;
+}
+
+/* ==========
+  Global
+========== */
+body {
+  font-family: var(--ff-body);
+  font-size: var(--fs-400);
+  font-weight: var(--fw-400);
+
+  background-color: var(--neutral-250);
+  color: var(--neutral-800);
+}
+
+/* ============
+  Composition
+============ */
+.flow > *:where(:not(:first-child)) {
+  margin-top: var(--flow-spacer, 1rem);
+}
+
+.flex {
+  display: flex;
+  gap: var(--gap, 1rem);
+}
+
+/* ==========
+  Utility
+========== */
+.fw-500 { font-weight: var(--fw-500); }
+.fw-700 { font-weight: var(--fw-700); }
+
+.fs-400 { font-size: var(--fs-400); }
+.fs-700 { font-size: var(--fs-700); }
+
+/* ==========
+  Block
+========== */
+.card {
+  display: grid;
+  width: min(100% - 2rem, 1000px);
+  grid-template-areas: 'profile' 'info';
+
+  margin-block: 4rem;
+  padding: 2.625rem; /* 42px */
+  
+  background-color: var(--clr-accent-200);
+  box-shadow: 0 8px 10px -2px var(--neutral-200);
+  border-radius: 30px;
+}
+
+.card__profile {
+  grid-area: profile;
+}
+
+.card__profile p {
+  max-width: 25ch;
+}
+
+.card__info {
+  display: grid;
+  grid-area: info;
+}
+
+.info__org {
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* on small screen sizes, center everything */
+@media (max-width: 50em) {
+  .card {
+    text-align: center;
+  }
+
+  .card__profile {
+    margin-bottom: 2rem;
+  }
+
+  .card__profile,
+  .card__profile > * {
+    margin-inline: auto;
+  }
+}
+
+@media (min-width: 50em) {
+  .card {
+    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-areas: 'profile . info'; 
+  }
+
+  /* position bottom right corner  */
+  .info__follows {
+    align-self: end;
+    justify-self: end;
+    text-align: end;
+  }
+}
+
+/* button */
+.btn {
+  display: inline-block;
+  
+  width: 200px;
+  padding: 20px;
+  cursor: pointer;
+  
+  text-align: center;
+  text-decoration: none;
+  font-weight: var(--fw-500);
+  
+  background-color: var(--neutral-800);
+  color: var(--neutral-100);
+  border-radius: 8px;
+
+  transition-property: background-color, box-shadow;
+  transition-timing-function: ease-in-out;
+  transition-duration: 250ms;
+}
+
+.btn:is(:hover, :focus) {
+  background-color: var(--clr-accent-400);
+  box-shadow: 5px 5px 2px -2px var(--neutral-200);
+}
+
+/* ============
+  Exception
+============ */
+/* more info */
+.more-info {
+  position: relative;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  background-color: transparent;
+  transition: transform 500ms ease-in-out;
+}
+
+.more-info::before {
+  content: 'Hello, World!';
+  position: absolute;
+  top: -3rem;
+  right: 0;
+  width: 10rem;
+
+  padding: .5rem;
+  
+  background-color: var(--neutral-100);
+  border-radius: 5px;
+  display: none;
+}
+
+.more-info:is(:hover, :focus)::before {
+  display: block;
+}
+
+/* social media links */
+.social-media a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  padding: 1rem;
+  transition: box-shadow 250ms ease-in-out;
+  box-shadow: inset 2px 2px 5px 1px var(--neutral-250);
+  
+  border: 1px solid var(--neutral-300);
+  border-radius: 20px;
+}
+
+.social-media a:is(:hover, :focus) {
+  box-shadow: 2px 2px 2px 2px var(--neutral-250);
+}
+
+/* progress bar */
+.progress-bar {
+  position: relative;
+  width: 100%;
+  height: 13px;
+
+  background-color: var(--neutral-300);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0 25% 0 0;
+
+  background-color: var(--clr-accent-400);
+}
